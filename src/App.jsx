@@ -1,14 +1,19 @@
-import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
+import AddWorkout from "./components/AddWorkout";
+import Navbar from "./components/Navbar";
+import "./App.css";
 
 function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">
-        Hi Welcome to Your workout Tracker
-      </h1>
-      <Dashboard></Dashboard>
-    </>
+    <BrowserRouter>
+      <Navbar></Navbar>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+
+        <Route path="/add-workout" element={<AddWorkout />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
