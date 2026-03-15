@@ -1,0 +1,58 @@
+import { useState, useEffect } from "react";
+import StrengthChart from "./StrengthChart";
+import axios from "axios";
+const API = "http://localhost:3001/workouts";
+//import useWorkouts from "../hooks/useWorkouts";
+
+//import VolumeChart from "../components/charts/VolumeChart";
+
+function Dashboard() {
+  const getWorkouts = async () => {
+    const res = await axios.get(API);
+    return res.data;
+  };
+
+  function useWorkouts() {
+    const [workouts, setWorkouts] = useState([]);
+
+    useEffect(() => {
+      load();
+    }, []);
+
+    const load = async () => {
+      const data = await getWorkouts();
+      setWorkouts(data);
+    };
+
+    return { workouts, setWorkouts, reload: load };
+  }
+  const { workouts } = useWorkouts();
+  const [muscle, setMuscle] = useState("");
+
+  const muscles = [...new Set(workouts.map((w) => w.muscle))];
+
+  const filtered =
+    muscle === "" ? workouts : workouts.filter((w) => w.muscle === muscle);
+
+  return (
+    <div style={{ padding: "40px" }}>
+      <h1>Strength Analytics</h1>
+
+      <select value={muscle} onChange={(e) => setMuscle(e.target.value)}>
+        <option value="">All Muscles</option>
+
+        {muscles.map((m) => (
+          <option key={m}>{m}</option>
+        ))}
+      </select>
+
+      <h2>Strength Progress</h2>
+      <StrengthChart workouts={filtered} />
+
+      {/*  <h2>Training Volume</h2>
+      <VolumeChart workouts={filtered} /> */}
+    </div>
+  );
+}
+
+export default Dashboard;
