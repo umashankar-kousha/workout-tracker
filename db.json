@@ -1,0 +1,18 @@
+{
+  "workouts": [
+    {
+      "id": 1,
+      "name": "Bench Press",
+      "category": "Push",
+      "sets": 4,
+      "reps": 10
+    },
+    {
+      "id": 2,
+      "name": "Pull Ups",
+      "category": "Pull",
+      "sets": 3,
+      "reps": 8
+    }
+  ]
+}
