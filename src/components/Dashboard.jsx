@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import StrengthChart from "./StrengthChart";
 import axios from "axios";
+import VolumeChart from "./VolumeChart";
 const API = "http://localhost:3001/workouts";
-//import useWorkouts from "../hooks/useWorkouts";
-
-//import VolumeChart from "../components/charts/VolumeChart";
 
 function Dashboard() {
   const getWorkouts = async () => {
@@ -49,8 +47,8 @@ function Dashboard() {
       <h2>Strength Progress</h2>
       <StrengthChart workouts={filtered} />
 
-      {/*  <h2>Training Volume</h2>
-      <VolumeChart workouts={filtered} /> */}
+      <h2>Training Volume</h2>
+      <VolumeChart workouts={filtered} />
     </div>
   );
 }
