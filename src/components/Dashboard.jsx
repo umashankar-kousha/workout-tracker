@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import StrengthChart from "./StrengthChart";
+
 import axios from "axios";
 import VolumeChart from "./VolumeChart";
 const API = "http://localhost:3001/workouts";
@@ -26,11 +27,17 @@ function Dashboard() {
   }
   const { workouts } = useWorkouts();
   const [muscle, setMuscle] = useState("");
-
-  const muscles = [...new Set(workouts.map((w) => w.muscle))];
+  const [muscles, setMuscles] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:3001/muscles")
+      .then((res) => res.json())
+      .then(setMuscles);
+  }, []);
 
   const filtered =
-    muscle === "" ? workouts : workouts.filter((w) => w.muscle === muscle);
+    muscle === ""
+      ? workouts
+      : workouts.filter((w) => String(w.muscleId) === String(muscle));
 
   return (
     <div style={{ padding: "40px" }}>
@@ -40,7 +47,9 @@ function Dashboard() {
         <option value="">All Muscles</option>
 
         {muscles.map((m) => (
-          <option key={m}>{m}</option>
+          <option key={m.id} value={m.id}>
+            {m.name}
+          </option>
         ))}
       </select>
 

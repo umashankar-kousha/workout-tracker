@@ -1,102 +1,80 @@
 import { useState } from "react";
+import MuscleDropdown from "./dropdown/MuscleDropDown";
+import ExerciseDropdown from "./dropdown/ExerciseDropdown";
 
 function WorkoutForm({ onAdd }) {
+  const today = new Date().toISOString().split("T")[0];
+  const [date, setDate] = useState(today);
+  const [muscleId, setMuscleId] = useState("");
+  const [exercise, setExercise] = useState("");
 
-  const [form,setForm] = useState({
-    exercise:"",
-    muscle:"",
-    weight:"",
-    reps:"",
-    sets:""
-  });
+  const [weight, setWeight] = useState("");
+  const [reps, setReps] = useState("");
+  const [sets, setSets] = useState("");
 
-  const handleChange = (e)=>{
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const workout = {
-      ...form,
-      weight:Number(form.weight),
-      reps:Number(form.reps),
-      sets:Number(form.sets),
-      date:new Date().toISOString().slice(0,10)
+      date,
+      muscleId,
+      exercise,
+      weight,
+      reps,
+      sets,
     };
 
-    onAdd(workout);
-
-    setForm({
-      exercise:"",
-      muscle:"",
-      weight:"",
-      reps:"",
-      sets:""
+    await fetch("http://localhost:3001/workouts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(workout),
     });
   };
 
   return (
+    <form onSubmit={handleSubmit}>
+      <label>Date</label>
+      <input
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
 
-    <form onSubmit={handleSubmit} style={{marginTop:"20px"}}>
+      <label>Muscle</label>
+      <MuscleDropdown value={muscleId} onChange={setMuscleId} />
 
-      <div>
-        <input
-          name="exercise"
-          placeholder="Exercise (Bench Press)"
-          value={form.exercise}
-          onChange={handleChange}
-        />
-      </div>
+      <label>Exercise</label>
+      <ExerciseDropdown
+        muscleId={muscleId}
+        value={exercise}
+        onChange={setExercise}
+      />
 
-      <div>
-        <input
-          name="muscle"
-          placeholder="Muscle Group (Chest)"
-          value={form.muscle}
-          onChange={handleChange}
-        />
-      </div>
+      <label>Weight</label>
+      <input
+        type="number"
+        value={weight}
+        onChange={(e) => setWeight(e.target.value)}
+      />
 
-      <div>
-        <input
-          type="number"
-          name="weight"
-          placeholder="Weight"
-          value={form.weight}
-          onChange={handleChange}
-        />
-      </div>
+      <label>Reps</label>
+      <input
+        type="number"
+        value={reps}
+        onChange={(e) => setReps(e.target.value)}
+      />
 
-      <div>
-        <input
-          type="number"
-          name="reps"
-          placeholder="Reps"
-          value={form.reps}
-          onChange={handleChange}
-        />
-      </div>
+      <label>Sets</label>
+      <input
+        type="number"
+        value={sets}
+        onChange={(e) => setSets(e.target.value)}
+      />
 
-      <div>
-        <input
-          type="number"
-          name="sets"
-          placeholder="Sets"
-          value={form.sets}
-          onChange={handleChange}
-        />
-      </div>
-
-      <button type="submit">
-        Add Workout
-      </button>
-
+      <button type="submit">Save Workout</button>
     </form>
-
   );
 }
 

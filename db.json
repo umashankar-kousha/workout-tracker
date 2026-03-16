@@ -1,31 +1,113 @@
 {
   "workouts": [
     {
-      "id": "1",
+      "id": "2b4a",
+      "date": "",
+      "muscleId": "1",
       "exercise": "Bench Press",
-      "muscle": "Chest",
-      "weight": 80,
-      "reps": 8,
-      "sets": 3,
-      "date": "2026-03-01"
+      "weight": "30",
+      "reps": "10",
+      "sets": "4"
+    },
+    {
+      "id": "052e",
+      "date": "2026-03-16",
+      "muscleId": "2",
+      "exercise": "Barbell Row",
+      "weight": "20",
+      "reps": "12",
+      "sets": "3"
+    },
+    {
+      "id": "5c98",
+      "date": "2026-03-09",
+      "muscleId": "3",
+      "exercise": "Squat",
+      "weight": "30",
+      "reps": "15",
+      "sets": "3"
+    }
+  ],
+  "muscles": [
+    {
+      "id": "1",
+      "name": "Chest"
     },
     {
       "id": "2",
-      "exercise": "Bench Press",
-      "muscle": "Chest",
-      "weight": 85,
-      "reps": 6,
-      "sets": 3,
-      "date": "2026-03-04"
+      "name": "Back"
     },
     {
       "id": "3",
-      "exercise": "Squat",
-      "muscle": "Legs",
-      "weight": 120,
-      "reps": 5,
-      "sets": 4,
-      "date": "2026-03-03"
+      "name": "Legs"
+    },
+    {
+      "id": "4",
+      "name": "Shoulders"
+    },
+    {
+      "id": "5",
+      "name": "Biceps"
+    },
+    {
+      "id": "6",
+      "name": "Triceps"
+    },
+    {
+      "id": "7",
+      "name": "Abs"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "1",
+      "muscleId": 1,
+      "name": "Bench Press"
+    },
+    {
+      "id": "2",
+      "muscleId": 1,
+      "name": "Incline Dumbbell Press"
+    },
+    {
+      "id": "3",
+      "muscleId": 2,
+      "name": "Pull Ups"
+    },
+    {
+      "id": "4",
+      "muscleId": 2,
+      "name": "Barbell Row"
+    },
+    {
+      "id": "5",
+      "muscleId": 3,
+      "name": "Squat"
+    },
+    {
+      "id": "6",
+      "muscleId": 3,
+      "name": "Leg Press"
+    },
+    {
+      "id": "7",
+      "muscleId": 4,
+      "name": "Overhead Press"
+    },
+    {
+      "id": "8",
+      "muscleId": 4,
+      "name": "Lateral Raise"
+    },
+    {
+      "id": "9",
+      "muscleId": 5,
+      "name": "Barbell Curl"
+    },
+    {
+      "id": "10",
+      "muscleId": 6,
+      "name": "Tricep Pushdown"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

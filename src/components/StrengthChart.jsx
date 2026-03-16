@@ -1,5 +1,5 @@
 import { Line } from "react-chartjs-2";
-//import { calculate1RM } from "../../utils/calculate1RM";
+
 import {
   Chart as ChartJS,
   LineElement,
