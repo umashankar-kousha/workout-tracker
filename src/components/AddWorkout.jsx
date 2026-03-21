@@ -1,8 +1,11 @@
 import WorkoutForm from "./WorkoutForm";
 import { useState } from "react";
 import axios from "axios";
+import { apiServer } from "./services";
+import { toast } from "react-toastify";
 
-const API = "http://localhost:3001/workouts";
+
+const API = `${apiServer}/workouts`;
 
 function AddWorkout() {
   const addWorkout = async (workout) => {
@@ -11,7 +14,7 @@ function AddWorkout() {
   };
   const handleAdd = async (workout) => {
     await addWorkout(workout);
-    alert("Workout Added");
+    toast.success("Workout added 💪");
   };
 
   return (

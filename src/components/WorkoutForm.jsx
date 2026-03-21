@@ -1,6 +1,7 @@
 import { useState } from "react";
-import MuscleDropdown from "./dropdown/MuscleDropDown";
+import MuscleDropdown from "./dropdown/MuscleDropdown";
 import ExerciseDropdown from "./dropdown/ExerciseDropdown";
+import { apiServer } from "./services";
 
 function WorkoutForm({ onAdd }) {
   const today = new Date().toISOString().split("T")[0];
@@ -23,14 +24,20 @@ function WorkoutForm({ onAdd }) {
       reps,
       sets,
     };
-
-    await fetch("http://localhost:3001/workouts", {
+    onAdd(workout);
+    setDate(today);
+    setMuscleId("");
+    setExercise("");
+    setWeight("");
+    setReps("");
+    setSets("");
+    /* await fetch(`${apiServer}/workouts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(workout),
-    });
+    }); */
   };
 
   return (
@@ -43,11 +50,11 @@ function WorkoutForm({ onAdd }) {
       />
 
       <label>Muscle</label>
-      <MuscleDropdown value={muscleId} onChange={setMuscleId} />
+      <MuscleDropdown value={muscleId} change={setMuscleId} />
 
       <label>Exercise</label>
       <ExerciseDropdown
-        muscleId={muscleId}
+        muscleId={Number(muscleId)}
         value={exercise}
         onChange={setExercise}
       />

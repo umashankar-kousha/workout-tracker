@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 
 import WorkoutCard from "./WorkoutCard";
 import axios from "axios";
+import { apiServer } from "./services";
+import { toast } from "react-toastify";
 
-const API = "http://localhost:3001/workouts";
+const API = `${apiServer}/workouts?_embed=muscle`;
 
 function WorkoutHistory() {
   const [workouts, setWorkouts] = useState([]);
@@ -27,7 +29,9 @@ function WorkoutHistory() {
   };
 
   const deleteWorkout = async (id) => {
-    await axios.delete(`${API}/${id}`);
+    
+    await axios.delete(`${apiServer}/workouts/${id}`);
+    
   };
 
   const handleDelete = async (id) => {
@@ -36,7 +40,7 @@ function WorkoutHistory() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3001/muscles")
+    fetch(`${apiServer}/muscles`)
       .then((res) => res.json())
       .then(setMuscles);
   }, []);
@@ -66,7 +70,6 @@ function WorkoutHistory() {
             </option>
           ))}
         </select>
-        {/* <MuscleDropdown value={muscleId} onChange={setMuscleId} /> */}
 
         <input
           type="date"
@@ -84,9 +87,9 @@ function WorkoutHistory() {
         </button>
       </div>
 
-      {filteredWorkouts.map((w) => (
-        <WorkoutCard key={w.id} workout={w} onDelete={handleDelete} />
-      ))}
+      {filteredWorkouts.map((w) => {
+        return <WorkoutCard key={w.id} workout={w} onDelete={handleDelete} />;
+      })}
     </div>
   );
 }

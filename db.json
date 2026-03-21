@@ -1,30 +1,30 @@
 {
   "workouts": [
     {
-      "id": "2b4a",
-      "date": "",
+      "id": "d20b",
+      "date": "2026-03-18",
       "muscleId": "1",
       "exercise": "Bench Press",
-      "weight": "30",
+      "weight": "25",
       "reps": "10",
       "sets": "4"
     },
     {
-      "id": "052e",
-      "date": "2026-03-16",
-      "muscleId": "2",
-      "exercise": "Barbell Row",
-      "weight": "20",
-      "reps": "12",
+      "id": "d3e1",
+      "date": "2026-03-18",
+      "muscleId": "1",
+      "exercise": "Incline Dumbbell Press",
+      "weight": "7.5",
+      "reps": "10",
       "sets": "3"
     },
     {
-      "id": "5c98",
-      "date": "2026-03-09",
-      "muscleId": "3",
-      "exercise": "Squat",
-      "weight": "30",
-      "reps": "15",
+      "id": "dff8",
+      "date": "2026-03-18",
+      "muscleId": "2",
+      "exercise": "Pull Ups",
+      "weight": "10",
+      "reps": "5",
       "sets": "3"
     }
   ],
@@ -54,7 +54,7 @@
       "name": "Triceps"
     },
     {
-      "id": "7",
+      "id": "8",
       "name": "Abs"
     }
   ],

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import StrengthChart from "./StrengthChart";
+import { apiServer } from "./services";
 
 import axios from "axios";
 import VolumeChart from "./VolumeChart";
-const API = "http://localhost:3001/workouts";
+const API = `${apiServer}/workouts`;
 
 function Dashboard() {
   const getWorkouts = async () => {
@@ -29,7 +30,7 @@ function Dashboard() {
   const [muscle, setMuscle] = useState("");
   const [muscles, setMuscles] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3001/muscles")
+    fetch(`${apiServer}/muscles`)
       .then((res) => res.json())
       .then(setMuscles);
   }, []);

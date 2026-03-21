@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
+import { apiServer } from "../services";
 
 function ExerciseDropdown({ muscleId, value, onChange }) {
   const [exercises, setExercises] = useState([]);
 
   useEffect(() => {
     if (!muscleId) return;
-
+    {
+    }
     async function getExercisesByMuscle(muscleId) {
-      const res = await fetch(
-        `http://localhost:3001/exercises?muscleId=${muscleId}`,
-      );
+      const res = await fetch(`${apiServer}/exercises?muscleId=${muscleId}`);
 
       return res.json();
     }

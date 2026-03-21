@@ -1,7 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
+import { apiServer } from "./services";
+import { toast } from "react-toastify";
 
-const API = "http://localhost:3001/workouts";
+const API = `${apiServer}/workouts`;
 
 function WorkoutCard({ workout, onDelete }) {
   const [editing, setEditing] = useState(false);
@@ -15,6 +17,36 @@ function WorkoutCard({ workout, onDelete }) {
     await updateWorkout(workout.id, form);
     setEditing(false);
     window.location.reload();
+  };
+
+  const handleOnDelete = () => {
+    toast(
+      ({ closeToast }) => (
+        <div>
+          <p style={{ fontWeight: "bold" }}>Delete this workout?</p>
+
+          <div style={{ display: "flex", gap: "10px", marginTop: "8px" }}>
+            <button
+              style={{ background: "red", color: "white" }}
+              onClick={() => {
+                onDelete(workout.id);
+
+                toast.error("Workout deleted ❌");
+                closeToast();
+              }}
+            >
+              Yes
+            </button>
+
+            <button onClick={closeToast}>Cancel</button>
+          </div>
+        </div>
+      ),
+      {
+        autoClose: false,
+        closeOnClick: false,
+      },
+    );
   };
 
   if (editing) {
@@ -44,14 +76,14 @@ function WorkoutCard({ workout, onDelete }) {
     <div style={{ border: "1px solid gray", margin: "10px", padding: "10px" }}>
       <h3>{workout.exercise}</h3>
 
-      <p>Muscle: {workout.muscle}</p>
+      <p>Muscle: {workout.muscle.name}</p>
       <p>Weight: {workout.weight}</p>
       <p>Reps: {workout.reps}</p>
       <p>Sets: {workout.sets}</p>
 
       <button onClick={() => setEditing(true)}>Edit</button>
 
-      <button onClick={() => onDelete(workout.id)}>Delete</button>
+      <button onClick={handleOnDelete}>Delete</button>
     </div>
   );
 }

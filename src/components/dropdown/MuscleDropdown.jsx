@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { apiServer } from "../services";
 
-function MuscleDropdown({ value, onChange }) {
+function MuscleDropdown({ value, change }) {
   const [muscles, setMuscles] = useState([]);
 
   useEffect(() => {
     async function getMuscles() {
-      const res = await fetch("http://localhost:3001/muscles");
+      const res = await fetch(`${apiServer}/muscles`);
 
       return res.json();
     }
@@ -13,8 +14,12 @@ function MuscleDropdown({ value, onChange }) {
     getMuscles().then(setMuscles);
   }, []);
 
+  const handleChange = (e) => {
+    change(e.target.value);
+  };
+
   return (
-    <select value={value} onChange={(e) => onChange(e.target.value)}>
+    <select value={value} onChange={handleChange}>
       <option value="">Select Muscle</option>
 
       {muscles.map((m) => (
